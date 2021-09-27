@@ -29,7 +29,7 @@ function Articles({ articles }: InferGetStaticPropsType<typeof getStaticProps>):
   return <div>Articles list goes here
     <ul>
     { articles.map((article) => 
-    <li key={article.fields.titre}> article.fields.titre</li>
+    <li key={article.fields.titre}> { article.fields.titre } </li>
     ) }
     </ul>
      </div>;
