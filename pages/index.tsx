@@ -1,16 +1,21 @@
-import { createClient, Entry } from "contentful";
+import { createClient } from "contentful";
 import { GetStaticPropsResult } from "next";
-import { TypeArticle } from "../cf-types";
+import { TypeArticle, TypeArticleFields } from "../cf-types";
+import { InferGetStaticPropsType } from 'next'
 
 
-export async function getStaticProps(): Promise<GetStaticPropsResult<Entry<TypeArticle>[]>> {
+interface StaticProps {
+  articles: TypeArticle[];
+}
+
+export async function getStaticProps(): Promise<GetStaticPropsResult<StaticProps>> {
 
   const client = createClient({
     space: process.env.CONTENTFUL_SPACE_ID || "foo",
     accessToken: process.env.CONTENTFUL_TOKEN || "foo"
   });
 
-  const result = await client.getEntries( { "content-type": "article"} );
+  const result = await client.getEntries<TypeArticleFields>();
 
   return {
     props: {
@@ -20,8 +25,14 @@ export async function getStaticProps(): Promise<GetStaticPropsResult<Entry<TypeA
 }
 
 
-function Articles(): JSX.Element {
-  return <div>Articles list goes here</div>;
+function Articles({ articles }: InferGetStaticPropsType<typeof getStaticProps>): JSX.Element {
+  return <div>Articles list goes here
+    <ul>
+    { articles.map((article) => 
+    <li key={article.fields.titre}> article.fields.titre</li>
+    ) }
+    </ul>
+     </div>;
 }
 
-export default Articles;
+export default Articles; 
