@@ -3,6 +3,7 @@ import * as Contentful from "contentful";
 
 export interface TypeArticleFields {
     titre: Contentful.EntryFields.Symbol;
+    slug?: Contentful.EntryFields.Symbol;
     contenu: CFRichTextTypes.Block | CFRichTextTypes.Inline;
     illustration: Contentful.Asset;
 }
