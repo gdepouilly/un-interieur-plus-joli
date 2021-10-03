@@ -9,9 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@contentful/rich-text-plain-text-renderer": "^15.3.6",
     "@contentful/rich-text-types": "^15.3.6",
+    "@types/ramda": "^0.27.45",
     "contentful": "^9.0.0",
     "next": "11.1.0",
+    "ramda": "^0.27.1",
     "react": "17.0.2",
     "react-dom": "17.0.2"
   },
