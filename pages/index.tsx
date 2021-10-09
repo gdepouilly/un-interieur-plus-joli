@@ -1,29 +1,25 @@
 import { createClient } from "contentful";
-import { GetStaticPropsResult } from "next";
+import { GetStaticProps } from "next";
 import { TypeArticle, TypeArticleFields } from "../cf-types";
 import { InferGetStaticPropsType } from "next";
 import ArticlePreview from "../components/ArticlePreview";
 
-interface StaticProps {
-  articles: TypeArticle[];
-}
-
-export async function getStaticProps(): Promise<
-  GetStaticPropsResult<StaticProps>
-> {
+export const getStaticProps: GetStaticProps = async () => {
   const client = createClient({
     space: process.env.CONTENTFUL_SPACE_ID || "foo",
     accessToken: process.env.CONTENTFUL_TOKEN || "foo",
   });
 
-  const result = await client.getEntries<TypeArticleFields>();
+  const result = await client.getEntries<TypeArticleFields>({
+    content_type: "article",
+  });
 
   return {
     props: {
       articles: result.items,
     },
   };
-}
+};
 
 function Articles({
   articles,
@@ -31,7 +27,7 @@ function Articles({
   return (
     <div>
       <ul>
-        {articles.map((article) => (
+        {articles.map((article: TypeArticle) => (
           <ArticlePreview key={article.sys.id} article={article} />
         ))}
       </ul>
