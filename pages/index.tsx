@@ -1,7 +1,6 @@
 import { createClient } from "contentful";
-import { GetStaticProps } from "next";
+import { InferGetStaticPropsType, GetStaticProps } from "next";
 import { TypeArticle, TypeArticleFields } from "../cf-types";
-import { InferGetStaticPropsType } from "next";
 import ArticlePreview from "../components/ArticlePreview";
 
 export const getStaticProps: GetStaticProps = async () => {
@@ -21,7 +20,7 @@ export const getStaticProps: GetStaticProps = async () => {
   };
 };
 
-function Articles({
+export default function Articles({
   articles,
 }: InferGetStaticPropsType<typeof getStaticProps>): JSX.Element {
   return (
@@ -34,5 +33,3 @@ function Articles({
     </div>
   );
 }
-
-export default Articles;

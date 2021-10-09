@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@contentful/rich-text-plain-text-renderer": "^15.3.6",
+    "@contentful/rich-text-react-renderer": "^15.4.0",
     "@contentful/rich-text-types": "^15.3.6",
     "@types/ramda": "^0.27.45",
     "contentful": "^9.0.0",
