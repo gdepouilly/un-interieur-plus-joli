@@ -3,7 +3,6 @@ import { InferGetStaticPropsType, GetStaticPaths, GetStaticProps } from "next";
 import { TypeArticleFields } from "../../cf-types";
 import Image from "next/image";
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
-// import Fallback from "../../components/Fallback";
 import { useRouter } from 'next/router'
 
 
