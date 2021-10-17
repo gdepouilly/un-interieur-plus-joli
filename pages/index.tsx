@@ -1,13 +1,10 @@
-import { createClient } from "contentful";
+import { getContentfulClientApi } from "../helpers/getContentfulClientApi";
 import { InferGetStaticPropsType, GetStaticProps } from "next";
 import { TypeArticle, TypeArticleFields } from "../cf-types";
 import ArticlePreview from "../components/ArticlePreview";
 
 export const getStaticProps: GetStaticProps = async () => {
-  const client = createClient({
-    space: process.env.CONTENTFUL_SPACE_ID || "foo",
-    accessToken: process.env.CONTENTFUL_TOKEN || "foo",
-  });
+  const client = getContentfulClientApi();
 
   const result = await client.getEntries<TypeArticleFields>({
     content_type: "article",
@@ -17,7 +14,7 @@ export const getStaticProps: GetStaticProps = async () => {
     props: {
       articles: result.items,
     },
-    revalidate: 10
+    revalidate: 10,
   };
 };
 

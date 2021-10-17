@@ -1,15 +1,11 @@
-import { createClient } from "contentful";
+import { getContentfulClientApi } from "../../helpers/getContentfulClientApi";
 import { InferGetStaticPropsType, GetStaticPaths, GetStaticProps } from "next";
 import { TypeArticleFields } from "../../cf-types";
 import Image from "next/image";
-import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
-import { useRouter } from 'next/router'
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
+import { useRouter } from "next/router";
 
-
-const client = createClient({
-  space: process.env.CONTENTFUL_SPACE_ID || "foo",
-  accessToken: process.env.CONTENTFUL_TOKEN || "foo",
-});
+const client = getContentfulClientApi();
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const { items } = await client.getEntries<TypeArticleFields>({
@@ -34,7 +30,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
   return {
     props: { article: result.items[0] },
-    revalidate: 10
+    revalidate: 10,
   };
 };
 
@@ -46,7 +42,7 @@ export default function ArticleDetails(
   // If the page is not yet generated, this will be displayed
   // initially until getStaticProps() finishes running
   if (router.isFallback) {
-    return <div>Loading...</div>
+    return <div>Loading...</div>;
   }
 
   // Render article
