@@ -4,6 +4,7 @@ import { TypeArticleFields } from "../../cf-types";
 import Image from "next/image";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { useRouter } from "next/router";
+import DefaultErrorPage from "next/error";
 
 const client = getContentfulClientApi();
 
@@ -28,6 +29,12 @@ export const getStaticProps: GetStaticProps = async (context) => {
     "fields.slug": context.params?.slug,
   });
 
+  if (!result.items.length) {
+    return {
+      props: {},
+    };
+  }
+
   return {
     props: { article: result.items[0] },
     revalidate: 10,
@@ -43,6 +50,9 @@ export default function ArticleDetails(
   // initially until getStaticProps() finishes running
   if (router.isFallback) {
     return <div>Loading...</div>;
+  }
+  if (!props.article) {
+    return <DefaultErrorPage statusCode={404} />;
   }
 
   // Render article
