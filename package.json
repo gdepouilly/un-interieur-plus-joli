@@ -9,11 +9,16 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@chakra-ui/icons": "^1.0.16",
+    "@chakra-ui/react": "^1.6.10",
     "@contentful/rich-text-plain-text-renderer": "^15.3.6",
     "@contentful/rich-text-react-renderer": "^15.4.0",
     "@contentful/rich-text-types": "^15.3.6",
+    "@emotion/react": "^11",
+    "@emotion/styled": "^11",
     "@types/ramda": "^0.27.45",
     "contentful": "^9.0.0",
+    "framer-motion": "^4",
     "next": "11.1.0",
     "ramda": "^0.27.1",
     "react": "17.0.2",

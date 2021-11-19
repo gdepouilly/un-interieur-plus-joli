@@ -1,4 +1,8 @@
-import Link from "next/link";
+import Image from "next/image";
+import Logo from "../public/images/logo.png";
+import Navbar from "./Navbar";
+
+import { Box } from "@chakra-ui/react";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -6,18 +10,10 @@ interface LayoutProps {
 
 export default function Layout({ children }: LayoutProps): JSX.Element {
   return (
-    <div className="layout">
-      <header>
-        <Link href="/">
-          <a>
-            <h1>
-              <span>Un intérieur plus joli</span>
-            </h1>
-          </a>
-        </Link>
-      </header>
-
+    <Box>
+      <Image src={Logo} alt="logo of the author" />
+      <Navbar />
       <div className="page-content">{children}</div>
-    </div>
+    </Box>
   );
 }
