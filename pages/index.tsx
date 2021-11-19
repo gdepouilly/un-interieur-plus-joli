@@ -23,7 +23,7 @@ export default function Articles({
   articles,
 }: InferGetStaticPropsType<typeof getStaticProps>): JSX.Element {
   return (
-    <Container maxW={"7xl"} p="12">
+    <Container maxW={"8xl"} p="12">
       <Heading as="h2" marginTop="5">
         Derniers articles
       </Heading>

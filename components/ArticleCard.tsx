@@ -24,38 +24,52 @@ export default function ArticleCard(props: ArticleCardProps): JSX.Element {
     <WrapItem
       key={props.article.sys.id}
       width={{ base: "100%", sm: "45%", md: "45%", lg: "30%" }}
+      borderRadius="lg"
+      borderWidth="1px"
+      borderColor="gray.300"
     >
       <Box w="100%">
-        <Box borderRadius="lg" overflow="hidden" maxHeight="250">
-          <Box h="200" w="200" className="foo" position="relative">
-            <Image
-              src={"https:" + props.article.fields.illustration.fields.file.url}
-              layout="fill"
-              objectFit="cover"
-              alt={"article image"}
-            />
-          </Box>
+        <Box
+          borderTopRadius="lg"
+          overflow="hidden"
+          position="relative"
+          h="200"
+          w="200"
+        >
+          <Image
+            src={"https:" + props.article.fields.illustration.fields.file.url}
+            layout="fill"
+            objectFit="cover"
+            alt={"article image"}
+          />
         </Box>
-        <HStack spacing={2} marginTop="3">
-          {props.article.fields.tags?.map((tag) => (
-            <Tag size={"md"} colorScheme="orange" key={tag}>
-              {" "}
-              {tag}{" "}
-            </Tag>
-          ))}
-        </HStack>
-        <Heading fontSize="xl" marginTop="2">
-          <Link href={`/articles/${props.article.fields.slug}`} passHref>
-            <a>{props.article.fields.titre}</a>
-          </Link>
-        </Heading>
-        <Text fontWeight="medium" color="gray.400" fontSize="sm" marginTop="3">
-          <CalendarIcon />{" "}
-          {new Date(props.article.sys.createdAt).toLocaleDateString("fr-FR")}
-        </Text>
-        <Text as="p" fontSize="md" marginTop="2">
-          {getArticleCard(props.article.fields.contenu)}
-        </Text>
+        <Box pl={4} pr={4} pb={4}>
+          <HStack spacing={2} marginTop="3">
+            {props.article.fields.tags?.map((tag) => (
+              <Tag size={"md"} colorScheme="orange" key={tag}>
+                {" "}
+                {tag}{" "}
+              </Tag>
+            ))}
+          </HStack>
+          <Heading fontSize="xl" marginTop="2">
+            <Link href={`/articles/${props.article.fields.slug}`} passHref>
+              <a>{props.article.fields.titre}</a>
+            </Link>
+          </Heading>
+          <Text
+            fontWeight="medium"
+            color="gray.400"
+            fontSize="sm"
+            marginTop="3"
+          >
+            <CalendarIcon />{" "}
+            {new Date(props.article.sys.createdAt).toLocaleDateString("fr-FR")}
+          </Text>
+          <Text as="p" fontSize="md" marginTop="2">
+            {getArticleCard(props.article.fields.contenu)}
+          </Text>
+        </Box>
       </Box>
     </WrapItem>
   );
