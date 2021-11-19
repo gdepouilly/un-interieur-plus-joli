@@ -6,6 +6,7 @@ export interface TypeArticleFields {
     slug?: Contentful.EntryFields.Symbol;
     contenu: CFRichTextTypes.Block | CFRichTextTypes.Inline;
     illustration: Contentful.Asset;
+    tags?: Contentful.EntryFields.Symbol[];
 }
 
 export type TypeArticle = Contentful.Entry<TypeArticleFields>;
