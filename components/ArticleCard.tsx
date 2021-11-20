@@ -24,6 +24,7 @@ export default function ArticleCard(props: ArticleCardProps): JSX.Element {
     <WrapItem
       key={props.article.sys.id}
       width={{ base: "100%", sm: "45%", md: "45%", lg: "30%" }}
+      boxShadow='lg'
       borderRadius="lg"
       borderWidth="1px"
       borderColor="gray.300"

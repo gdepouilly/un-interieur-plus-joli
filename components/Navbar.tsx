@@ -3,7 +3,6 @@ import {
   Flex,
   Text,
   IconButton,
-  Button,
   Stack,
   Collapse,
   Icon,
@@ -12,7 +11,6 @@ import {
   PopoverTrigger,
   PopoverContent,
   useColorModeValue,
-  useBreakpointValue,
   useDisclosure,
 } from "@chakra-ui/react";
 import {
@@ -21,6 +19,8 @@ import {
   ChevronDownIcon,
   ChevronRightIcon,
 } from "@chakra-ui/icons";
+import {FaInstagram, FaFacebook, FaPinterest} from "react-icons/fa";
+
 
 export default function WithSubnavigation(): JSX.Element {
   const { isOpen, onToggle } = useDisclosure();
@@ -52,14 +52,7 @@ export default function WithSubnavigation(): JSX.Element {
             aria-label={"Toggle Navigation"}
           />
         </Flex>
-        <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
-          <Text
-            textAlign={useBreakpointValue({ base: "center", md: "left" })}
-            fontFamily={"heading"}
-            color={useColorModeValue("gray.800", "white")}
-          >
-            Logo
-          </Text>
+        <Flex flex={{ base: 1 }} justify={{ base: "center", md: "center" }}>
 
           <Flex display={{ base: "none", md: "flex" }} ml={10}>
             <DesktopNav />
@@ -72,28 +65,10 @@ export default function WithSubnavigation(): JSX.Element {
           direction={"row"}
           spacing={6}
         >
-          <Button
-            as={"a"}
-            fontSize={"sm"}
-            fontWeight={400}
-            variant={"link"}
-            href={"#"}
-          >
-            Instagram
-          </Button>
-          <Button
-            display={{ base: "none", md: "inline-flex" }}
-            fontSize={"sm"}
-            fontWeight={600}
-            color={"white"}
-            bg={"pink.400"}
-            href={"#"}
-            _hover={{
-              bg: "pink.300",
-            }}
-          >
-            Facebook
-          </Button>
+          <Icon as={FaInstagram}  w={8} h={8} color="#833AB4"/>
+          <Icon as={FaFacebook}  w={8} h={8} color="facebook.500"/>
+          <Icon as={FaPinterest}  w={8} h={8} color="#E60023"/>
+
         </Stack>
       </Flex>
 
@@ -266,7 +241,7 @@ interface NavItem {
 
 const NAV_ITEMS: Array<NavItem> = [
   {
-    label: "Inspiration",
+    label: "Inspirations",
     children: [
       {
         label: "Explore Design Work",
@@ -281,7 +256,7 @@ const NAV_ITEMS: Array<NavItem> = [
     ],
   },
   {
-    label: "Find Work",
+    label: "Do it yourself",
     children: [
       {
         label: "Job Board",
@@ -296,11 +271,11 @@ const NAV_ITEMS: Array<NavItem> = [
     ],
   },
   {
-    label: "Learn Design",
+    label: "Brico",
     href: "#",
   },
   {
-    label: "Hire Designers",
+    label: "",
     href: "#",
   },
 ];
