@@ -11,6 +11,7 @@ export const getStaticProps: GetStaticProps = async () => {
     content_type: "article",
   });
 
+  console.log(result.items[0].fields.contenu);
   return {
     props: {
       articles: result.items,

@@ -5,6 +5,24 @@ import Image from "next/image";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { useRouter } from "next/router";
 import DefaultErrorPage from "next/error";
+import { BLOCKS} from "@contentful/rich-text-types";
+
+
+
+const renderOptions = {
+  renderNode: {
+    [BLOCKS.EMBEDDED_ASSET]: (node, children) => {
+      return (
+        <Image
+          src={`https://${node.data.target.fields.file.url}`}
+          height={node.data.target.fields.file.details.image.height}
+          width={node.data.target.fields.file.details.image.width}
+          alt={node.data.target.fields.description}
+        />
+      );
+    },
+  },
+};
 
 const client = getContentfulClientApi();
 
@@ -41,6 +59,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   };
 };
 
+
 export default function ArticleDetails(
   props: InferGetStaticPropsType<typeof getStaticProps>
 ): JSX.Element {
@@ -66,7 +85,7 @@ export default function ArticleDetails(
         height={illustration.fields.file.details.image.height}
         alt="article-image"
       />
-      <div>{documentToReactComponents(contenu)}</div>
+      <>{documentToReactComponents(contenu, renderOptions)}</>
     </div>
   );
 }
