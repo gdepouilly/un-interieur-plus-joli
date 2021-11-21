@@ -19,8 +19,7 @@ import {
   ChevronDownIcon,
   ChevronRightIcon,
 } from "@chakra-ui/icons";
-import {FaInstagram, FaFacebook, FaPinterest} from "react-icons/fa";
-
+import { FaInstagram, FaFacebook, FaPinterest } from "react-icons/fa";
 
 export default function WithSubnavigation(): JSX.Element {
   const { isOpen, onToggle } = useDisclosure();
@@ -53,7 +52,6 @@ export default function WithSubnavigation(): JSX.Element {
           />
         </Flex>
         <Flex flex={{ base: 1 }} justify={{ base: "center", md: "center" }}>
-
           <Flex display={{ base: "none", md: "flex" }} ml={10}>
             <DesktopNav />
           </Flex>
@@ -65,10 +63,9 @@ export default function WithSubnavigation(): JSX.Element {
           direction={"row"}
           spacing={6}
         >
-          <Icon as={FaInstagram}  w={8} h={8} color="#833AB4"/>
-          <Icon as={FaFacebook}  w={8} h={8} color="facebook.500"/>
-          <Icon as={FaPinterest}  w={8} h={8} color="#E60023"/>
-
+          <Icon as={FaInstagram} w={8} h={8} color="#833AB4" />
+          <Icon as={FaFacebook} w={8} h={8} color="facebook.500" />
+          <Icon as={FaPinterest} w={8} h={8} color="#E60023" />
         </Stack>
       </Flex>
 

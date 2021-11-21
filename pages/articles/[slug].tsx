@@ -5,13 +5,29 @@ import Image from "next/image";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { useRouter } from "next/router";
 import DefaultErrorPage from "next/error";
-import { BLOCKS} from "@contentful/rich-text-types";
+import { BLOCKS, Block, Inline } from "@contentful/rich-text-types";
 
 
+const client = getContentfulClientApi();
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const { items } = await client.getEntries<TypeArticleFields>({
+    content_type: "article",
+  });
+  
+  const paths = items.map((item) => ({
+    params: { slug: item.fields.slug },
+  }));
+  
+  return {
+    paths,
+    fallback: true,
+  };
+};
 
 const renderOptions = {
   renderNode: {
-    [BLOCKS.EMBEDDED_ASSET]: (node, children) => {
+    [BLOCKS.EMBEDDED_ASSET]: function renderAssets(node: Block | Inline) {
       return (
         <Image
           src={`https://${node.data.target.fields.file.url}`}
@@ -22,23 +38,6 @@ const renderOptions = {
       );
     },
   },
-};
-
-const client = getContentfulClientApi();
-
-export const getStaticPaths: GetStaticPaths = async () => {
-  const { items } = await client.getEntries<TypeArticleFields>({
-    content_type: "article",
-  });
-
-  const paths = items.map((item) => ({
-    params: { slug: item.fields.slug },
-  }));
-
-  return {
-    paths,
-    fallback: true,
-  };
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
@@ -58,7 +57,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
     revalidate: 10,
   };
 };
-
 
 export default function ArticleDetails(
   props: InferGetStaticPropsType<typeof getStaticProps>
